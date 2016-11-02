@@ -1,5 +1,5 @@
-<div ng-controller="AddController">
-    <p>Ajouter un client</p>
+<section ng-controller="AddController">
+    <h3 class="section-title">Ajouter un client</h3>
     <p class="text-success" ng-bind="success"></p>
     <p class="text-error" ng-bind="error"></p>
     <form name="addClient" ng-submit="submit(addClient.$valid)" novalidate>
@@ -12,6 +12,6 @@
             <option value="complete">Projet terminé</option>
             <option value="partner">Partenaire</option>
         </select>
-        <button type="submit">Ajouter</button>
+        <button class="btn btn-success" type="submit">Ajouter</button>
     </form>
-</div>
+</section>

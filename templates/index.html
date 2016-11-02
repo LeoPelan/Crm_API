@@ -13,10 +13,10 @@
 </head>
 <body>
     <header ng-controller="HeaderController">
-        <h1>{{ title }}</h1>
+        <h1 class="site-title">{{ title }}</h1>
         <div id="menu">
-            <a href="/#/">Accueil</a>
-            <a href="/#/client/add">Ajouter un client</a>
+            <a class="btn" href="/#/">Accueil</a>
+            <a class="btn btn-primary" href="/#/client/add">Ajouter un client</a>
         </div>
     </header>
     <div ng-view></div>

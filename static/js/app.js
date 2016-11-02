@@ -31,6 +31,9 @@ app.controller('IndexController', ['$scope', '$http', function($scope, $http) {
     $scope.success = '';
     $scope.error = '';
 
+    $scope.load = false;
+    $scope.loadMessage = '';
+
     // list
     function list() {
         $http.get('http://localhost:5000/api/client/list').then(function(res) {
@@ -61,6 +64,7 @@ app.controller('IndexController', ['$scope', '$http', function($scope, $http) {
     $scope.doSearch = function(isValid) {
         $scope.success = $scope.error = '';
         if (isValid) {
+            setLoading('Recherche en cours');
             var query = prepareGetParams($scope.search);
 
             $http.get('http://localhost:5000/api/client/search'+query).then(function(res) {
@@ -70,11 +74,14 @@ app.controller('IndexController', ['$scope', '$http', function($scope, $http) {
                     $scope.client_list = res.data.client_list;
                     $scope.success = res.data.client_list.length + ' résultat(s)';
                 } else {
-                    $scope.error = 'Erreur lors de la recherche';
+                    $scope.success = 'Aucun client ne correspond à cette recherche';
+                    $scope.client_list = list();
                 }
+                resetLoading();
             }, function (err) {
                 $scope.error = 'Erreur lors de la recherche';
                 console.log(err);
+                resetLoading();
             });
         } else {
             $scope.error = "Le formulaire n'est pas valide";
@@ -84,6 +91,7 @@ app.controller('IndexController', ['$scope', '$http', function($scope, $http) {
     // export
     $scope.export = function() {
         $scope.success = $scope.error = '';
+        setLoading('Export en cours');
         $http.get('http://localhost:5000/api/client/export').then(function(res) {
             console.log(res);
             if (res.data.success) {
@@ -91,29 +99,34 @@ app.controller('IndexController', ['$scope', '$http', function($scope, $http) {
             } else {
                 $scope.error = 'Erreur lors de l\'export';
             }
+            resetLoading();
         }, function (err) {
             $scope.error = 'Erreur lors de l\'export';
             console.log(err);
+            resetLoading();
         });
     };
 
     // import
     $scope.import = function() {
         $scope.success = $scope.error = '';
+        setLoading('Import en cours');
         $http.get('http://localhost:5000/api/client/import').then(function(res) {
             if (res.data.success) {
                 if (res.data.users_added > 1) {
-                    $scope.success = res.data.users_added + ' utilisateurs ont été importés';
+                    $scope.success = res.data.users_added + ' clients ont été importés';
                 } else {
-                    $scope.success = res.data.users_added + ' utilisateur à été importé';
+                    $scope.success = res.data.users_added + ' client à été importé';
                 }
                 $scope.client_list = list();
             } else {
                 $scope.error = 'Une erreur est survenue lors de l\'import';
             }
+            resetLoading();
         }, function (err) {
             $scope.error = 'Erreur lors de l\'import';
             console.log(err);
+            resetLoading();
         });
     };
 
@@ -123,6 +136,16 @@ app.controller('IndexController', ['$scope', '$http', function($scope, $http) {
             res += key + '=' + value + '&';
         });
         return res.slice(0, -1);
+    }
+
+    function setLoading(message) {
+        $scope.load = true;
+        $scope.loadMessage = message;
+    }
+
+    function resetLoading() {
+        $scope.load = false;
+        $scope.loadMessage = '';
     }
 }]);
 
