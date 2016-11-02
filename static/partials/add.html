@@ -1,0 +1,17 @@
+<div ng-controller="AddController">
+    <p>Ajouter un client</p>
+    <p class="text-success" ng-bind="success"></p>
+    <p class="text-error" ng-bind="error"></p>
+    <form name="addClient" ng-submit="submit(addClient.$valid)" novalidate>
+        <input type="text" name="company" id="company" ng-model="form.company" placeholder="Entreprise" required>
+        <input type="text" name="lastname" id="lastname" ng-model="form.lastname" placeholder="Nom" required>
+        <input type="text" name="firstname" id="firstname" ng-model="form.firstname" placeholder="Prénom" required>
+        <select name="state" id="state" ng-model="form.state" title="Etat du projet" required>
+            <option value="prospect" selected>Prospect</option>
+            <option value="progress">Projet en cours</option>
+            <option value="complete">Projet terminé</option>
+            <option value="partner">Partenaire</option>
+        </select>
+        <button type="submit">Ajouter</button>
+    </form>
+</div>

@@ -1,0 +1,33 @@
+<div ng-controller="IndexController">
+    <p>Il y a {{ client_list.length }} client(s)</p>
+    <p class="text-success" ng-bind="success"></p>
+    <p class="text-error" ng-bind="error"></p>
+    <section id="client-list">
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Entreprise</th>
+                    <th>Nom du client</th>
+                    <th>Etat</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="client in client_list">
+                    <td>{{ $index }}</td>
+                    <td>{{ client.company }}</td>
+                    <td>{{ client.firstname }} {{ client.lastname }}</td>
+                    <td>{{ client.state }}</td>
+                    <td>
+                        <a href="/#/client/edit/{{ client._id.$oid }}">Modifier</a>
+                        <button ng-click="delete(client)">Supprimer</button>
+                    </td>
+                </tr>
+                <tr ng-if="!client_list.length" class="no-client">
+                    <td colspan="5">Il n'y a pas de client</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</div>

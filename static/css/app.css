@@ -1,0 +1,101 @@
+@font-face {
+    font-family: "RbtThin";
+    src: url("../fonts/Roboto-Thin.ttf");
+}
+
+@font-face {
+    font-family: "RbtLight";
+    src: url("../fonts/Roboto-Light.ttf");
+}
+
+@font-face {
+    font-family: "RbtRegular";
+    src: url("../fonts/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: "RbtBold";
+    src: url("../fonts/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: "RbtBlack";
+    src: url("../fonts/Roboto-Black.ttf");
+}
+
+body {
+    color: #2c3e50;
+    background-color: #ecf0f1;
+    font-family: "RbtLight", Arial, sans-serif;
+    font-size: 16px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+table .no-client {
+    padding: 10px 0;
+    text-align: center;
+    font: 20px "RbtBold", Arial, sans-serif;
+    color: #e74c3c;
+}
+
+table thead {
+    font-family: "RbtBold", Arial, sans-serif;
+    border-bottom: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+table thead th:first-child, tbody tr td:first-child {
+    max-width: 150px;
+}
+
+table thead th {
+    text-align: left;
+    font-size: 20px;
+    padding: 10px;
+    border-left: 1px solid black;
+}
+
+table thead th:first-child {
+    border: none;
+}
+
+table tbody {
+    font-family: "RbtLight", Arial, sans-serif;
+}
+
+table tbody tr td {
+    padding: 10px;
+    border-left: 1px solid black;
+}
+
+table tbody tr td:first-child {
+    border: none;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+table tbody tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/** Text error success **/
+.text-error, .text-success {
+    font: 18px "RbtLight", serif;
+}
+
+.text-success {
+    color: #27ae60;
+}
+
+.text-error {
+    color: #e74c3c;
+}
+
+/** add **/
