@@ -1,7 +1,24 @@
 <div ng-controller="IndexController">
-    <p>Il y a {{ client_list.length }} client(s)</p>
+    <p>{{ client_list.length }} client(s)</p>
     <p class="text-success" ng-bind="success"></p>
     <p class="text-error" ng-bind="error"></p>
+    <button ng-click="export()">Exporter les clients</button>
+    <button ng-click="import()">Importer les clients</button>
+    <section id="search">
+        <form name="searchClient" ng-submit="doSearch(searchClient.$valid)" novalidate>
+            <input type="text" name="company" id="company" ng-model="search.company" placeholder="Entreprise">
+            <input type="text" name="lastname" id="lastname" ng-model="search.lastname" placeholder="Nom">
+            <input type="text" name="firstname" id="firstname" ng-model="search.firstname" placeholder="Prénom">
+            <select name="state" id="state" ng-model="search.state" title="Etat du projet">
+                <option value="" selected></option>
+                <option value="prospect">Prospect</option>
+                <option value="progress">Projet en cours</option>
+                <option value="complete">Projet terminé</option>
+                <option value="partner">Partenaire</option>
+            </select>
+            <button type="submit">Rechercher</button>
+        </form>
+    </section>
     <section id="client-list">
         <table>
             <thead>
@@ -15,7 +32,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="client in client_list">
-                    <td>{{ $index }}</td>
+                    <td>{{ $index + 1 }}</td>
                     <td>{{ client.company }}</td>
                     <td>{{ client.firstname }} {{ client.lastname }}</td>
                     <td>{{ client.state }}</td>
@@ -25,7 +42,7 @@
                     </td>
                 </tr>
                 <tr ng-if="!client_list.length" class="no-client">
-                    <td colspan="5">Il n'y a pas de client</td>
+                    <td colspan="5">Aucun résultat</td>
                 </tr>
             </tbody>
         </table>

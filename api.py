@@ -1,4 +1,3 @@
-
 from __future__ import print_function
 import httplib2
 import os
@@ -49,19 +48,20 @@ def get_credentials():
         print('Storing credentials to ' + credential_path)
     return credentials
 
+
 def readSheet():
     spreadsheet_id = '136d8-jVZw-XGhnlezPZtYRahOEka8bCbYG-j17g_POQ'
+    sheet_id = '1ZpAQEw9SH3r6uxRHiNiFIv8IGX767QKQGBt_1ajqb_U'
     range_names = 'A1:D'
-    discoveryUrl = ('https://sheets.googleapis.com/$discovery/rest?'
-                    'version=v4')
+    discovery_url = ('https://sheets.googleapis.com/$discovery/rest?'
+                     'version=v4')
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
-    service = discovery.build('sheets', 'v4', http=http,
-                              discoveryServiceUrl=discoveryUrl)
-    result = service.spreadsheets().values().batchGet(
-    spreadsheetId=spreadsheet_id, ranges=range_names).execute()
+    service = discovery.build('sheets', 'v4', http=http, discoveryServiceUrl=discovery_url)
+    result = service.spreadsheets().values().batchGet(spreadsheetId=sheet_id, ranges=range_names).execute()
 
     return result
+
 
 def writeSheet(values, range_name):
     body = {
@@ -71,6 +71,7 @@ def writeSheet(values, range_name):
     value_input_option = 'RAW'
 
     spreadsheet_id = '136d8-jVZw-XGhnlezPZtYRahOEka8bCbYG-j17g_POQ'
+    sheet_id = '1ZpAQEw9SH3r6uxRHiNiFIv8IGX767QKQGBt_1ajqb_U'
     range_name = range_name
     discoveryUrl = ('https://sheets.googleapis.com/$discovery/rest?'
                     'version=v4')
@@ -80,8 +81,9 @@ def writeSheet(values, range_name):
                               discoveryServiceUrl=discoveryUrl)
 
     result = service.spreadsheets().values().update(
-    spreadsheetId=spreadsheet_id, range=range_name,
+    spreadsheetId=sheet_id, range=range_name,
     valueInputOption=value_input_option, body=body).execute()
+
 
 if __name__ == '__main__':
     main()
